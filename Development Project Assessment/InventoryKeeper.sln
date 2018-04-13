@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryKeeper", "InventoryKeeper\InventoryKeeper.csproj", "{0DE86F24-209D-4415-8307-DAD7C0A5D9E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryKeeper.Tests", "InventoryKeeper.Tests\InventoryKeeper.Tests.csproj", "{892CC024-A25D-450F-A330-152AEB582123}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{4C433F45-F6CD-4673-B60E-EFBD426492C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B79CD71A-8F6F-4394-8F18-11B54B67CDBC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{7D2C24E5-BAB4-43BA-90CF-C0BD86D56F8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryKeeper.Data", "InventoryKeeper.Data\InventoryKeeper.Data.csproj", "{1684397A-D4A5-455C-A6F4-6D24039CEB20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0DE86F24-209D-4415-8307-DAD7C0A5D9E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DE86F24-209D-4415-8307-DAD7C0A5D9E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DE86F24-209D-4415-8307-DAD7C0A5D9E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DE86F24-209D-4415-8307-DAD7C0A5D9E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{892CC024-A25D-450F-A330-152AEB582123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{892CC024-A25D-450F-A330-152AEB582123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{892CC024-A25D-450F-A330-152AEB582123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{892CC024-A25D-450F-A330-152AEB582123}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1684397A-D4A5-455C-A6F4-6D24039CEB20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1684397A-D4A5-455C-A6F4-6D24039CEB20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1684397A-D4A5-455C-A6F4-6D24039CEB20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1684397A-D4A5-455C-A6F4-6D24039CEB20}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0DE86F24-209D-4415-8307-DAD7C0A5D9E9} = {4C433F45-F6CD-4673-B60E-EFBD426492C6}
+		{892CC024-A25D-450F-A330-152AEB582123} = {B79CD71A-8F6F-4394-8F18-11B54B67CDBC}
+		{1684397A-D4A5-455C-A6F4-6D24039CEB20} = {7D2C24E5-BAB4-43BA-90CF-C0BD86D56F8F}
+	EndGlobalSection
+EndGlobal

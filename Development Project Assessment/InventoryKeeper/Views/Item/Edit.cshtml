@@ -1,0 +1,75 @@
+﻿@model InventoryKeeper.Models.InventoryItemEditModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "mainForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Inventory Item</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class='@(@Model.ShowSuccessMessage ? "text-success" : "hide")'>
+            <p>
+                <strong>Successfully Saved!</strong>
+            </p>
+        </div>
+        @Html.HiddenFor(model => model.EditItem.Id)
+        @Html.HiddenFor(model => model.EditItem.Age)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EditItem.TypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.EditItem.TypeId, (SelectList)ViewData["ItemTypes"], "-- Please select --", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EditItem.TypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EditItem.ItemDescr, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EditItem.ItemDescr, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EditItem.ItemDescr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EditItem.SN, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EditItem.SN, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EditItem.SN, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EditItem.Photo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (Model.EditItem.Photo != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.EditItem.Photo);
+                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                
+                    <img src='@imgsrc' style="max-width:100px;max-height:100px" />
+                }
+                <input type="file" id="FileUpload" name="FileUpload" accept="jpg" data-val="true" data-val-required="File is required" />
+                @Html.ValidationMessageFor(model => model.EditItem.Photo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Search", "Item")
+</div>

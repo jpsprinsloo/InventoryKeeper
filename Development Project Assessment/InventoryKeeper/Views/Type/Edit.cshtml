@@ -1,0 +1,113 @@
+﻿@model InventoryKeeper.Models.ListItemEditModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>ListItem</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class='@(@Model.ShowSuccessMessage ? "text-success" : "hide")'>
+            <p>
+                <strong>Successfully Saved!</strong>
+            </p>
+        </div>
+        @Html.HiddenFor(model => model.EditItem.Id)
+        @Html.HiddenFor(model => model.EditItem.Age)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EditItem.TypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.EditItem.TypeId, (SelectList)ViewData["Types"], "-- Please select --", new { htmlAttributes = new { @class = "form-control" } })<input type="button" id="btnAddType" class="btn btn-default" value="Add New" onclick="javascript:AddType()" />
+                @Html.ValidationMessageFor(model => model.EditItem.TypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EditItem.ListItemName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EditItem.ListItemName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EditItem.ListItemName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EditItem.ListItemDescr, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EditItem.ListItemDescr, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EditItem.ListItemDescr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EditItem.ListItemValue, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EditItem.ListItemValue, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EditItem.ListItemValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EditItem.IsEnabled, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.EditItem.IsEnabled)
+                    @Html.ValidationMessageFor(model => model.EditItem.IsEnabled, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Search", "Type")
+</div>
+
+<script type="text/javascript">
+    function AddType() {
+        BootstrapDialog.show({
+            title: 'Add New Type',
+            message: $('<input type="text" id="newType" />'),
+            buttons: [{
+                label: 'Save',
+                cssClass: 'btn btn-default',
+                hotkey: '13',
+                action: function (dialogItself) {
+                    var newType = $("#newType").val();
+                    $.ajax({
+                        url: '@Url.Action("AddType", "Type")',
+                        method: "POST",
+                        data: {
+                            Type: newType
+                        },
+                        success: function (result) {
+                            $("#EditItem_TypeId").append("<option value=" + result + ">" + newType + "</option>").find("option[value=" + result + "]").prop("selected", true).change();
+                            dialogItself.close();
+                        }
+                    });
+                }
+            },
+            {
+                label: 'Cancel',
+                cssClass: 'btn btn-default',
+                action: function (dialogItself) {
+                    dialogItself.close();
+                }
+            }]
+        });
+    };
+</script>

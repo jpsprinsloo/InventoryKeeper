@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Search List Item";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Search List Items</h2>
+<div>
+    <input type="button" id="btnAdd" class="btn btn-default" value="Add New" />
+    <input type="button" id="btnEdit" class="btn btn-default" value="Edit" />
+</div>
+
+<div id="dataTable_wrapper" class="dataTables_wrapper" role="grid">
+    <table class="display" id="resultTable">
+        <thead>
+            <tr role="row">
+                <th role="columnheader">Id</th>
+                <th role="columnheader">List Item Type</th>
+                <th role="columnheader">List Item Name</th>
+                <th role="columnheader">List Item Description</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+@Styles.Render("~/Content/dataTable")
+@Scripts.Render("~/bundles/baseDatatable")
+
+<script type="text/javascript">
+    var AjaxSource = '@Url.Action("SearchItems", "Type")';
+
+    function EditEntry(id) {
+        window.location = '@Url.Action("Edit", "Type")' + '/' + id;
+    };
+
+    function Close() {
+        window.location = '@Url.Action("Index", "Home")';
+    };
+</script>

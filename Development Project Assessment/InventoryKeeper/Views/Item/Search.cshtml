@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Search Inventory Items";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Search Inventory Items</h2>
+
+<div>
+    <input type="button" id="btnAdd" class="btn btn-default" value="Add New" />
+    <input type="button" id="btnEdit" class="btn btn-default" value="Edit" />
+    <div class="pull-right">
+        @Html.Label("Search by Types", htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownList("ItemTypes", (SelectList)ViewData["ItemTypes"], "-- All Types --")
+    </div>
+   
+</div>
+
+<div id="dataTable_wrapper" class="dataTables_wrapper" role="grid">
+    <table class="display" id="resultTable">
+        <thead>
+            <tr role="row">
+                <th role="columnheader">Id</th>
+                <th role="columnheader">Item Type</th>
+                <th role="columnheader">Item Description</th>
+                <th role="columnheader">Serial Number</th>
+                <th role="columnheader">Photo</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+@Styles.Render("~/Content/dataTable")
+@Scripts.Render("~/bundles/baseDatatable")
+
+<script type="text/javascript">
+    var AjaxSource = '@Url.Action("SearchItems", "Item")';
+
+    function EditEntry(id) {
+        window.location = '@Url.Action("Edit", "Item")' + '/' + id;
+    };
+
+    function ReloadAjax() {
+        AjaxSource = '@Url.Action("SearchItems", "Item")?typeId=' + $("select[name=ItemTypes]").find("option:selected").val();
+        $("#resultTable").dataTable().fnReloadAjax(AjaxSource);
+    };
+
+    function columndefExtension(array) {
+        array.push({
+            "aTargets": [4],
+            "bSortable": false,
+            "mRender": function (data, type, full) {
+                return '<img src=' + data + ' style="max-width:50px;max-height:50px">';
+            }
+        });
+        return array;
+    };
+
+    $(document).ready(function () {
+        $("select[name=ItemTypes]").change(function () {
+            ReloadAjax();
+        });
+    });
+</script>
